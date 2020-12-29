@@ -1,19 +1,31 @@
 import React, { useState } from 'react'
-
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addPost } from '../posts/postsReducer'
+import { postUpdated } from '../posts/postsReducer'
+import { nanoid } from '@reduxjs/toolkit'
 
-function AppPost() {
-  const posts = useSelector((state) => state.posts)
+function EditPost({ match }) {
   const dispatch = useDispatch()
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const history = useHistory()
 
-  const addPostHandler = (e) => {
-    dispatch(addPost(title, content))
+  const posts = useSelector((state) => state.posts)
+  const { postId } = match.params
 
-    setTitle('')
-    setContent('')
+  const post = posts.find((x) => x.id === postId)
+
+  const [title, setTitle] = useState(post.title)
+  const [content, setContent] = useState(post.content)
+
+  const updatePostHandler = (e) => {
+    const newPost = {
+      title,
+      content,
+      id: post.id,
+    }
+
+    dispatch(postUpdated(newPost))
+
+    history.push(`/posts/${postId}`)
   }
   const textChanged = (e) => {
     switch (e.target.name) {
@@ -49,7 +61,7 @@ function AppPost() {
             onChange={textChanged}
           />
         </label>
-        <button type="button" onClick={addPostHandler}>
+        <button type="button" onClick={updatePostHandler}>
           Save Post
         </button>
       </form>
@@ -57,4 +69,4 @@ function AppPost() {
   )
 }
 
-export default AppPost
+export default EditPost

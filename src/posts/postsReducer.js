@@ -9,12 +9,32 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost(state, action) {
-      state.push(action.payload)
+    addPost: {
+      reducer(state, action) {
+        state.push(action.payload)
+      },
+      prepare(title, content) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            content,
+          },
+        }
+      },
+    },
+
+    postUpdated(state, action) {
+      const { id, title, content } = action.payload
+      const existingPost = state.find((post) => post.id === id)
+      if (existingPost) {
+        existingPost.title = title
+        existingPost.content = content
+      }
     },
   },
 })
 
-export const { addPost } = postsSlice.actions
+export const { addPost, postUpdated } = postsSlice.actions
 
 export default postsSlice.reducer
