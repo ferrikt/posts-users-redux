@@ -9,12 +9,19 @@ function AppPost() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
+  const [userId, setUserId] = useState('')
+
+  const users = useSelector((state) => state.users)
+
   const addPostHandler = (e) => {
-    dispatch(addPost(title, content))
+    dispatch(addPost(title, content, userId))
 
     setTitle('')
     setContent('')
   }
+
+  const onAuthorChanged = (e) => setUserId(e.target.value)
+
   const textChanged = (e) => {
     switch (e.target.name) {
       case 'title':
@@ -25,6 +32,14 @@ function AppPost() {
         break
     }
   }
+
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+
+  const usersOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ))
 
   return (
     <>
@@ -40,6 +55,12 @@ function AppPost() {
           />
         </label>
 
+        <label htmlFor="postAuthor">Author:</label>
+        <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+          <option value=""></option>
+          {usersOptions}
+        </select>
+
         <label>
           Post content:
           <input
@@ -49,7 +70,7 @@ function AppPost() {
             onChange={textChanged}
           />
         </label>
-        <button type="button" onClick={addPostHandler}>
+        <button type="button" onClick={addPostHandler} disabled={!canSave}>
           Save Post
         </button>
       </form>
