@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { postUpdated } from '../posts/postsReducer'
+import { postUpdated } from './postsReducer'
 import { nanoid } from '@reduxjs/toolkit'
 
 function EditPost({ match }) {
@@ -39,7 +39,7 @@ function EditPost({ match }) {
   }
 
   return (
-    <>
+    <section>
       <form>
         <h2>Add post</h2>
         <label>
@@ -65,7 +65,7 @@ function EditPost({ match }) {
           Save Post
         </button>
       </form>
-    </>
+    </section>
   )
 }
 

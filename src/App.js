@@ -8,10 +8,10 @@ import {
 
 import { Navbar } from './app/Navbar'
 
-import AppPost from './posts/addPost'
-import PostsList from './posts/postsList'
-import SinglePost from './posts/singlePost'
-import EditPost from './posts/editPost'
+import AppPost from './features/posts/addPost'
+import PostsList from './features/posts/postsList'
+import SinglePost from './features/posts/singlePost'
+import EditPost from './features/posts/editPost'
 function App() {
   return (
     <Router>
@@ -24,10 +24,8 @@ function App() {
             render={() => (
               <section>
                 <h2>Welcome to the Redux Essentials example app!</h2>
-
-                <PostsList />
-
                 <AppPost />
+                <PostsList />
               </section>
             )}
           />

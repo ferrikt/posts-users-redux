@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addPost } from '../posts/postsReducer'
+import { addPost } from './postsReducer'
 
 function AppPost() {
   const posts = useSelector((state) => state.posts)
@@ -34,7 +34,7 @@ function AppPost() {
   }
 
   const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
-
+  debugger
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}
@@ -42,7 +42,7 @@ function AppPost() {
   ))
 
   return (
-    <>
+    <section className="posts-list">
       <form>
         <h2>Add post</h2>
         <label>
@@ -74,7 +74,7 @@ function AppPost() {
           Save Post
         </button>
       </form>
-    </>
+    </section>
   )
 }
 
