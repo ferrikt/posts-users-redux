@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { postUpdated } from './postsReducer'
-import { nanoid } from '@reduxjs/toolkit'
 
 function EditPost({ match }) {
   const dispatch = useDispatch()
@@ -34,6 +33,8 @@ function EditPost({ match }) {
         break
       case 'content':
         setContent(e.target.value)
+        break
+      default:
         break
     }
   }

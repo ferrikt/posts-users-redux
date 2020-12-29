@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addPost } from './postsReducer'
 
 function AppPost() {
-  const posts = useSelector((state) => state.posts)
   const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -30,11 +29,13 @@ function AppPost() {
       case 'content':
         setContent(e.target.value)
         break
+      default:
+        break
     }
   }
 
   const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
-  debugger
+
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}
