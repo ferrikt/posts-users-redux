@@ -12,6 +12,9 @@ import AppPost from './features/posts/addPost'
 import PostsList from './features/posts/postsList'
 import SinglePost from './features/posts/singlePost'
 import EditPost from './features/posts/editPost'
+import UsersList from './features/posts/UsersList'
+import UserPage from './features/posts/UserPage'
+
 function App() {
   return (
     <Router>
@@ -31,7 +34,8 @@ function App() {
           />
           <Route exact path="/posts/:postId" component={SinglePost} />
           <Route exact path="/editPost/:postId" component={EditPost} />
-
+          <Route exact path="/users" component={UsersList} />
+          <Route exact path="/users/:userId" component={UserPage} />
           <Redirect to="/" />
         </Switch>
       </div>
