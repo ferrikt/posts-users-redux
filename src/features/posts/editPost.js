@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { postUpdated } from './postsReducer'
+import { postUpdated, selectPostById } from './postsReducer'
 
 function EditPost({ match }) {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const posts = useSelector((state) => state.posts)
   const { postId } = match.params
 
-  const post = posts.find((x) => x.id === postId)
+  const post = useSelector((state) => selectPostById(state, postId))
 
   const [title, setTitle] = useState(post.title)
   const [content, setContent] = useState(post.content)
